@@ -1,0 +1,25 @@
+<!-- views/show.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= playlist.title %>></title>
+  </head>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+
+    <h1><%= playlist.title %></h1>
+    <h2><%= playlist.name %></h2>
+
+    <section class="controls">
+      <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
+        <button type="submit">Delete this playlist</button>
+      </form>
+      <a href="/playlists/<%= playlist._id %>/edit">
+        <button type="submit">Edit this playlist</button>
+      </a>
+    </section>
+  </body>
+</html>

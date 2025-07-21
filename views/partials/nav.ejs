@@ -1,0 +1,12 @@
+<nav>
+  <a href="/">MusicMood</a>
+  <a href="/songs">View all songs</a>
+  <a href="/playlists/new">Create a playlist</a>
+  <% if (user) { %>
+  <a href="/auth/sign-out">Sign out</a>
+  <a href="/profile/<%= user._id %>"><%= user.username %></a>
+  <% } else { %>
+  <a href="/auth/sign-up">Sign up</a>
+  <a href="/auth/sign-in">Sign in</a>
+  <% } %>
+</nav>

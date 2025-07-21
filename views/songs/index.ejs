@@ -1,0 +1,22 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All The Songs</title>
+  </head>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+
+    <h1>All The Songs</h1>
+    <ul>
+      <% allSongs.forEach(song => { %>
+      <li>
+        <a href="/songs/<%= song._id %>"><%= song.title %> </a>
+      </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>

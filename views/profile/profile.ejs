@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= playlistOwner.username %>'s profile</title>
+  </head>
+  <body>
+    <%- include("../partials/nav.ejs") %>
+
+    <h1><%= playlistOwner.username %>'s Playlists</h1>
+    <ul>
+      <% playlists.forEach(playlist=>{ %>
+      <li><a href="/playlists/<%= playlist.id %>"><%= playlist.name %></a></li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
