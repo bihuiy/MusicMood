@@ -4,21 +4,21 @@ import bcrypt from "bcrypt";
 
 const router = express.Router();
 
-router.get("/sign-up", (req, res, next) => {
+/* router.get("/sign-up", (req, res, next) => {
   try {
     return res.render("auth/sign-up.ejs");
   } catch (error) {
     next(error);
   }
-});
+}); */
 
-router.get("/sign-in", (req, res, next) => {
+/* router.get("/sign-in", (req, res, next) => {
   try {
     return res.render("auth/sign-in.ejs");
   } catch (error) {
     next(error);
   }
-});
+}); */
 
 // Sign Up
 router.post("/sign-up", async (req, res, next) => {
@@ -53,12 +53,10 @@ router.post("/sign-up", async (req, res, next) => {
 
     req.session.save(() => {
       // Redirect to the sign in page
-      return res.redirect("/sign-in");
+      return res.redirect("/");
     });
   } catch (error) {
     next(error);
-    //console.log(error);
-    //return res.send(error.message);
   }
 });
 
@@ -81,13 +79,11 @@ router.post("/sign-in", async (req, res, next) => {
     };
 
     req.session.save(() => {
-      // Redirect to the sign in page
+      // Redirect to the previous page
       return res.redirect("/");//????????
     });
   } catch (error) {
     next(error);
-    // console.log(error);
-    // return res.send(error.message);
   }
 });
 
@@ -99,8 +95,6 @@ router.get("/sign-out", (req, res, next) => {
     });
   } catch (error) {
     next(error);
-    //console.log(error);
-    //return res.send(error.message);
   }
 });
 

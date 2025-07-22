@@ -6,7 +6,7 @@ import Playlist from "../models/playlist.js";
 const router = express.Router();
 
 // index - display all songs, requires asynchronous database operations
-router.get("/", isSignedIn, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const songs = await Song.find();
     return res.render("songs/index.ejs", {

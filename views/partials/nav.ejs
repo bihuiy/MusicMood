@@ -6,7 +6,24 @@
   <a href="/auth/sign-out">Sign out</a>
   <a href="/profile/<%= user._id %>"><%= user.username %></a>
   <% } else { %>
-  <a href="/auth/sign-up">Sign up</a>
-  <a href="/auth/sign-in">Sign in</a>
+  <!-- <a href="/auth/sign-up">Sign up</a> -->
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#signUpModal"
+  >
+    Sign up
+  </button>
+  <!-- <a href="/auth/sign-in">Sign in</a> -->
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-toggle="modal"
+    data-bs-target="#signInModal"
+  >
+    Sign in
+  </button>
+
   <% } %>
 </nav>
