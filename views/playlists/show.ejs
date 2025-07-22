@@ -1,25 +1,42 @@
-<!-- views/show.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= playlist.title %>></title>
+    <title><%= playlist.name %></title>
   </head>
   <body>
     <%- include("../partials/nav.ejs") %>
 
-    <h1><%= playlist.title %></h1>
-    <h2><%= playlist.name %></h2>
+    <h1><%= playlist.name %></h1>
+    <h2>created by <%= playlist.owner.username %></h2>
+    <ul>
+      <% playlist.songs.forEach(song => { %>
+      <li>
+        <a href="/songs/<%= song._id %>"><%= song.title %> </a>
+        <form
+          action="/playlists/<%= playlist._id %>/remove-songId?_method=DELETE"
+          method="POST"
+        >
+          <input type="hidden" name="songId" value="<%= song._id %>" />
+          <button type="submit">Remove</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
 
+    <% if (playlist.owner._id.equals(user._id)) { %>
     <section class="controls">
-      <form action="/playlists/<%= playlist._id %>?_method=DELETE" method="POST">
+      <form
+        action="/playlists/<%= playlist._id %>?_method=DELETE"
+        method="POST"
+      >
         <button type="submit">Delete this playlist</button>
       </form>
       <a href="/playlists/<%= playlist._id %>/edit">
         <button type="submit">Edit this playlist</button>
       </a>
     </section>
+    <% } %>
   </body>
 </html>

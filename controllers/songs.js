@@ -1,6 +1,7 @@
 import express from "express";
 import Song from "../models/song.js";
 import isSignedIn from "../middleware/isSignedIn.js";
+import Playlist from "../models/playlist.js";
 
 const router = express.Router();
 
@@ -20,7 +21,25 @@ router.get("/", isSignedIn, async (req, res, next) => {
 router.get("/:songId", isSignedIn, async (req, res, next) => {
   try {
     const song = await Song.findById(req.params.songId);
-    return res.render("songs/show.ejs", { song });
+    const playlists = await Playlist.find({ owner: req.session.user._id });
+    //console.log(playlists);
+    return res.render("songs/show.ejs", { song, playlists });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// add a song to the playlist
+router.post("/:songId/add-to-playlist", isSignedIn, async (req, res, next) => {
+  const { songId } = req.params;
+  const { playlistId } = req.body;
+  try {
+    const playlist = await Playlist.findById(playlistId);
+    if (!playlist.songs.includes(songId)) {
+      playlist.songs.push(songId);
+      await playlist.save();
+    }
+    res.redirect(`/playlists/${playlistId}`);
   } catch (error) {
     next(error);
   }

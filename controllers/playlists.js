@@ -4,18 +4,6 @@ import isSignedIn from "../middleware/isSignedIn.js";
 
 const router = express.Router();
 
-// index - display all playlists, requires asynchronous database operations
-router.get("/", isSignedIn, async (req, res, next) => {
-  try {
-    const songs = await Playlist.find();
-    return res.render("playlists/index.ejs", {
-      allSongs: songs,
-    });
-  } catch (error) {
-    next(error);
-  }
-});
-
 // new - show a form to add a new playlist, displays a static form page that doesn’t require data from the database
 router.get("/new", isSignedIn, (req, res, next) => {
   try {
@@ -28,8 +16,10 @@ router.get("/new", isSignedIn, (req, res, next) => {
 // show - display a specific playlist's details, requires asynchronous database querying
 router.get("/:playlistId", isSignedIn, async (req, res, next) => {
   try {
-    const playlist = await Playlist.findById(req.params.playlistId);
-    return res.render("playlists/show.ejs", { playlist });
+    const populatedPlaylist = await Playlist.findById(req.params.playlistId)
+      .populate("owner")
+      .populate("songs");
+    return res.render("playlists/show.ejs", { playlist: populatedPlaylist });
   } catch (error) {
     next(error);
   }
@@ -48,11 +38,13 @@ router.get("/:playlistId/edit", isSignedIn, async (req, res, next) => {
 // update - update a specific playlist's details
 router.put("/:playlistId", isSignedIn, async (req, res, next) => {
   try {
-    const updatePlaylist = await Playlist.findByIdAndUpdate(
-      req.params.playlistId,
-      req.body
-    );
-    return res.redirect(`/playlists/${updatePlaylist._id}`);
+    const updatePlaylist = await Playlist.findById(req.params.playlistId);
+    if (updatePlaylist.owner.equals(req.session.user._id)) {
+      await updatePlaylist.updateOne(req.body);
+      return res.redirect(`/playlists/${updatePlaylist._id}`);
+    } else {
+      return res.send("You don't have permission to do that");
+    }
   } catch (error) {
     next(error);
   }
@@ -72,12 +64,35 @@ router.post("/", isSignedIn, async (req, res, next) => {
 // delete - remove a specific playlist
 router.delete("/:playlistId", isSignedIn, async (req, res, next) => {
   try {
-    await Playlist.findByIdAndDelete(req.params.playlistId);
-    return res.redirect("/playlists");
+    const playlist = await Playlist.findById(req.params.playlistId);
+    if (playlist.owner.equals(req.session.user._id)) {
+      await playlist.deleteOne();
+      return res.redirect(`/profile/${req.session.user._id}`);
+    } else {
+      res.send("You don't have permission to do that");
+    }
   } catch (error) {
     next(error);
   }
 });
+
+// remove a song from the playlist
+router.delete(
+  "/:playlistId/remove-songId",
+  isSignedIn,
+  async (req, res, next) => {
+    const { playlistId } = req.params;
+    const { songId } = req.body;
+    try {
+      const playlist = await Playlist.findByIdAndUpdate(playlistId, {
+        $pull: { songs: songId },
+      });
+      res.redirect(`/playlists/${playlistId}`);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 // export the router
 export default router;
