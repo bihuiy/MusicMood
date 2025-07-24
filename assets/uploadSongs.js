@@ -24,20 +24,20 @@ const seedSongs = [
       "https://res.cloudinary.com/dnycwkg4c/image/upload/v1753338736/Stitches_ngdf7r.avif",
   },
   {
-    title: "Roar",
-    artist: "Katy Perry",
-    album: "PRISM",
-    releaseYear: 2013,
-    songImage:
-      "https://res.cloudinary.com/dnycwkg4c/image/upload/v1753337506/Roar_v9ivpz.avif",
-  },
-  {
     title: "Blinding Lights",
     artist: "The Weeknd",
     album: "After Hours",
     releaseYear: 2020,
     songImage:
       "https://res.cloudinary.com/dnycwkg4c/image/upload/v1753335462/Blinding_Lights_ogeykh.avif",
+  },
+  {
+    title: "Roar",
+    artist: "Katy Perry",
+    album: "PRISM",
+    releaseYear: 2013,
+    songImage:
+      "https://res.cloudinary.com/dnycwkg4c/image/upload/v1753337506/Roar_v9ivpz.avif",
   },
   {
     title: "Shape of You",
@@ -96,6 +96,14 @@ const seedSongs = [
       "https://res.cloudinary.com/dnycwkg4c/image/upload/v1753338207/Attention_jwbqno.avif",
   },
   {
+    title: "Counting Stars",
+    artist: "OneRepublic",
+    album: "Native",
+    releaseYear: 2013,
+    songImage:
+      "https://res.cloudinary.com/dnycwkg4c/image/upload/v1753339025/Counting_Stars_xulrvg.avif",
+  },
+  {
     title: "Perfect",
     artist: "Ed Sheeran",
     album: "Divide",
@@ -110,14 +118,6 @@ const seedSongs = [
     releaseYear: 2011,
     songImage:
       "https://res.cloudinary.com/dnycwkg4c/image/upload/v1753338327/Who_Says_nahizw.avif",
-  },
-  {
-    title: "Counting Stars",
-    artist: "OneRepublic",
-    album: "Native",
-    releaseYear: 2013,
-    songImage:
-      "https://res.cloudinary.com/dnycwkg4c/image/upload/v1753339025/Counting_Stars_xulrvg.avif",
   },
   {
     title: "Green Green Grass",

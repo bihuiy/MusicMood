@@ -1,0 +1,110 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+
+nav {
+  background-color: white;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#destination,
+#action {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 16px;
+}
+
+#destination a {
+  text-decoration: none; /* Remove the default underline from nav links */
+  color: black; /* Change the default nav link color to black */
+}
+
+#destination a:hover {
+  color: #555; /* change the nav link color to grey when hover */
+}
+
+#sign-in-button {
+  color: black;
+  background-color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+}
+
+#sign-up-button {
+  background-color: black;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  margin-right: 16px;
+}
+
+#headers {
+  height: 460px;
+  text-align: center;
+  background-color: plum;
+  padding: 90px 0;
+  margin: 50px 0;
+}
+
+#subnav {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 10px 10px 10px;
+}
+
+#subnav a {
+  text-decoration: none;
+  color: black;
+}
+
+.song-image-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.song-image {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.song-image img  {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.song-name {
+  text-align: center;
+}
+
+.song-name a {
+  text-decoration: none;
+  color: black;
+}
+
+.flash-message {
+  text-align: center;
+  color: plum;
+  font-size: 1.5rem;
+}
+
+

@@ -24,6 +24,7 @@ const port = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(morgan("dev"));
+app.use(express.static("public")); // add the css styling
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -41,7 +42,7 @@ app.use(passMessageToView);
 // Home route
 app.get("/", async (req, res, next) => {
   try {
-    const limitedSongs = await Song.find().limit(4);
+    const limitedSongs = await Song.find().limit(8);
     res.render("index.ejs", { limitedSongs });
   } catch (error) {
     next(error);
@@ -51,7 +52,7 @@ app.get("/", async (req, res, next) => {
 // * -------- Router files --------
 // auth
 app.use("/auth", authRouter);
-// allSongs
+// songs
 app.use("/songs", songsRouter);
 // profile
 app.use("/profile", profileRouter);

@@ -1,11 +1,11 @@
-<!-- views/index.ejs -->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All The Songs</title>
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+
+    <title>Song library</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -19,19 +19,23 @@
     include("../partials/sign-up-modal.ejs") %> <%-
     include("../partials/message.ejs") %>
 
-    <h1>All The Songs</h1>
-    <ul>
+    <div id="headers">
+      <h1>Explore our full library and create your personal playlist.</h1>
+    </div>
+
+    <ul class="song-image-list">
       <% allSongs.forEach(song => { %>
       <li>
-        <img
-          src="<%= song.songImage %>"
-          alt="Song image"
-          style="max-width: 300px; max-height: 300px; object-fit: contain"
-        />
-        <a href="/songs/<%= song._id %>"><%= song.title %> </a>
+        <div class="song-image">
+          <img src="<%= song.songImage %>" alt="Song image" />
+        </div>
+        <div class="song-name">
+          <a href="/songs/<%= song._id %>"><%= song.title %> </a>
+        </div>
       </li>
       <% }) %>
     </ul>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"

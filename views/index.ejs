@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <link rel="stylesheet" href="/stylesheets/main.css" />
+    <title>MusicMood</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -17,19 +18,28 @@
     include("./partials/sign-up-modal.ejs") %> <%-
     include("./partials/message.ejs") %>
 
-    <h1>Explore the songs</h1>
-    <ul>
-      <% limitedSongs.forEach(song => { %>
-      <li>
-        <img
-          src="<%= song.songImage %>"
-          alt="Song image"
-          style="max-width: 300px; max-height: 300px; object-fit: contain"
-        />
-        <a href="/songs/<%= song._id %>"><%= song.title %> </a>
-      </li>
-      <% }) %>
-    </ul>
+    <div id="headers">
+      <h1>Every mood has a melody</h1>
+    </div>
+
+    <div id="subnav">
+      <a href="/songs">show all</a>
+    </div>
+
+    <article class="song">
+      <ul class="song-image-list">
+        <% limitedSongs.forEach(song => { %>
+        <li>
+          <div class="song-image">
+            <img src="<%= song.songImage %>" alt="Song image" />
+          </div>
+          <div class="song-name">
+            <a href="/songs/<%= song._id %>"><%= song.title %> </a>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+    </article>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
