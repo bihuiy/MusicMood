@@ -1,7 +1,8 @@
 import express from "express";
 import Playlist from "../models/playlist.js";
 import isSignedIn from "../middleware/isSignedIn.js";
-import { render } from "ejs";
+import { upload } from "../assets/cloudinary.js";
+import cloudinaryUpload from "../assets/cloudinaryUpload.js";
 
 const router = express.Router();
 
@@ -44,7 +45,7 @@ router.put("/:playlistId", isSignedIn, async (req, res, next) => {
       await updatePlaylist.updateOne(req.body);
       return res.redirect(`/playlists/${updatePlaylist._id}`);
     } else {
-      return res.send("You don't have permission to do that");
+      throw new Error("You don't have permission to do that");
     }
   } catch (error) {
     next(error);
@@ -52,15 +53,27 @@ router.put("/:playlistId", isSignedIn, async (req, res, next) => {
 });
 
 // create - add a new playlist to the profile, requires asynchronous database writing
-router.post("/", isSignedIn, async (req, res, next) => {
-  try {
-    req.body.owner = req.session.user._id;
-    const createdPlaylist = await Playlist.create(req.body);
-    return res.redirect(`/playlists/${createdPlaylist._id}`);
-  } catch (error) {
-    next(error);
+router.post(
+  "/",
+  isSignedIn,
+  upload.single("playlistImage"),
+  async (req, res, next) => {
+    try {
+      req.body.owner = req.session.user._id;
+
+      // upload image file to cloudinary just before we create our playlist
+      if (req.file) {
+        const result = await cloudinaryUpload(req.file.buffer);
+        req.body.playlistImage = result.secure_url;
+      }
+
+      const createdPlaylist = await Playlist.create(req.body);
+      return res.redirect(`/playlists/${createdPlaylist._id}`);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 // delete - remove a specific playlist
 router.delete("/:playlistId", isSignedIn, async (req, res, next) => {

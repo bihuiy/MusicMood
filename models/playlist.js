@@ -5,6 +5,7 @@ const playlistSchema = new mongoose.Schema({
   name: { type: String, required: true },
   owner: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   songs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Song" }],
+  playlistImage: { type: String },
 });
 
 // compile the schema into a model/function

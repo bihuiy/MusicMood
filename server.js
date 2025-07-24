@@ -8,6 +8,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo";
 import passUserToView from "./middleware/passUserToView.js";
 import passMessageToView from "./middleware/passMessageToView.js";
+import Song from "./models/song.js";
 
 // Routers
 import authRouter from "./controllers/auth.js";
@@ -38,8 +39,13 @@ app.use(passMessageToView);
 
 // * -------- Routes Section --------
 // Home route
-app.get("/", (req, res) => {
-  res.render("index.ejs");
+app.get("/", async (req, res, next) => {
+  try {
+    const limitedSongs = await Song.find().limit(4);
+    res.render("index.ejs", { limitedSongs });
+  } catch (error) {
+    next(error);
+  }
 });
 
 // * -------- Router files --------

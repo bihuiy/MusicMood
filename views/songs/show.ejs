@@ -19,6 +19,11 @@
 
     <h1><%= song.title %></h1>
     <h2>by <%= song.artist %> · <%= song.album %> · <%= song.releaseYear %></h2>
+    <img
+          src="<%= song.songImage %>"
+          alt="Song image"
+          style="max-width: 300px; max-height: 300px; object-fit: contain"
+        />
 
     <% if (user) { %>
     <!-- Button trigger modal - add a song to a playlist -->

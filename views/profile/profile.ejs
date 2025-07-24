@@ -12,7 +12,14 @@
     <h3><%= message %></h3>
     <ul>
       <% playlists.forEach(playlist=>{ %>
-      <li><a href="/playlists/<%= playlist._id %>"><%= playlist.name %></a></li>
+      <li>
+        <img
+          src="<%= playlist.playlistImage %>"
+          alt="playlist image"
+          width="300"
+        />
+        <a href="/playlists/<%= playlist._id %>"><%= playlist.name %></a>
+      </li>
       <% }) %>
     </ul>
   </body>

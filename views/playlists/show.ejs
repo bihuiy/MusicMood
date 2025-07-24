@@ -10,25 +10,28 @@
 
     <h1><%= playlist.name %></h1>
     <h2>created by <%= playlist.owner.username %></h2>
+    <img src="<%= playlist.playlistImage %>" alt="Playlist image" width="300" />
     <ul>
       <% playlist.songs.forEach(song => { %>
       <li>
         <a href="/songs/<%= song._id %>"><%= song.title %> </a>
+        <!-- if the user is the playlist owner, show up the remove song button -->
         <% if (playlist.owner._id.equals(user._id)) { %>
-          <section class="controls">
-        <form
-          action="/playlists/<%= playlist._id %>/remove-songId?_method=DELETE"
-          method="POST"
-        >
-          <input type="hidden" name="songId" value="<%= song._id %>" />
-          <button type="submit">Remove</button>
-        </form>
-      </section>
-      <% } %>
+        <section class="controls">
+          <form
+            action="/playlists/<%= playlist._id %>/remove-songId?_method=DELETE"
+            method="POST"
+          >
+            <input type="hidden" name="songId" value="<%= song._id %>" />
+            <button type="submit">Remove</button>
+          </form>
+        </section>
+        <% } %>
       </li>
       <% }) %>
     </ul>
 
+    <!-- if the user is the playlist owner, show up the playlist delete / edit button -->
     <% if (playlist.owner._id.equals(user._id)) { %>
     <section class="controls">
       <form

@@ -9,12 +9,13 @@
     <%- include("../partials/nav.ejs") %>
 
     <h1>Create a playlist</h1>
-    <form action="/playlists" method="POST">
+    <form action="/playlists" method="POST" enctype="multipart/form-data">
       <div>
         <label for="name">Name</label>
         <input type="text" name="name" id="name" placeholder="Name" required />
       </div>
-
+      <label for="playlistImage">Upload your playlist image</label>
+      <input type="file" name="playlistImage" id="playlistImage" accept="image/*">
       <button type="submit">Create this playlist</button>
     </form>
   </body>

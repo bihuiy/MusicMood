@@ -6,6 +6,7 @@ const songSchema = new mongoose.Schema({
   artist: { type: String, required: true },
   album: { type: String },
   releaseYear: String,
+  songImage: { type: String },
 });
 
 // compile the schema into a model/function

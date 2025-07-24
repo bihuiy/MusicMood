@@ -23,6 +23,11 @@
     <ul>
       <% allSongs.forEach(song => { %>
       <li>
+        <img
+          src="<%= song.songImage %>"
+          alt="Song image"
+          style="max-width: 300px; max-height: 300px; object-fit: contain"
+        />
         <a href="/songs/<%= song._id %>"><%= song.title %> </a>
       </li>
       <% }) %>
