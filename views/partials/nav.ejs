@@ -3,6 +3,7 @@
   <a href="/songs">View all songs</a>
   <a href="/playlists/new">Create a playlist</a>
   <% if (user) { %>
+
   <a href="/auth/sign-out">Sign out</a>
   <a href="/profile/<%= user._id %>"><%= user.username %></a>
   <% } else { %>

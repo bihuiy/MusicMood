@@ -2,6 +2,7 @@ import express from "express";
 import Song from "../models/song.js";
 import isSignedIn from "../middleware/isSignedIn.js";
 import Playlist from "../models/playlist.js";
+import Comment from "../models/comment.js";
 
 const router = express.Router();
 
@@ -17,13 +18,16 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-// show - display a specific song's details, requires asynchronous database querying
-router.get("/:songId", isSignedIn, async (req, res, next) => {
+// show - display a specific song's details (+comments), requires asynchronous database querying
+router.get("/:songId", async (req, res, next) => {
   try {
     const song = await Song.findById(req.params.songId);
-    const playlists = await Playlist.find({ owner: req.session.user._id });
+    const playlists = req.session.user
+      ? await Playlist.find({ owner: req.session.user._id })
+      : [];
     //console.log(playlists);
-    return res.render("songs/show.ejs", { song, playlists });
+    const comments = await Comment.find({ song: song._id }).populate("user");
+    return res.render("songs/show.ejs", { song, playlists, comments });
   } catch (error) {
     next(error);
   }
@@ -44,6 +48,44 @@ router.post("/:songId/add-to-playlist", isSignedIn, async (req, res, next) => {
     next(error);
   }
 });
+
+// add a comment to a song
+router.post("/:songId/add-comments", isSignedIn, async (req, res, next) => {
+  try {
+    const { content, mood } = req.body;
+    const comment = await Comment.create({
+      user: req.session.user._id,
+      song: req.params.songId,
+      content,
+      mood,
+    });
+    await comment.save();
+    return res.redirect(`/songs/${req.params.songId}`);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// delete a comment of a song
+router.delete(
+  "/:songId/remove-comments",
+  isSignedIn,
+  async (req, res, next) => {
+    try {
+      const { songId } = req.params;
+      const { commentId } = req.body;
+      const comment = await Comment.findById(commentId);
+      if (comment.user.equals(req.session.user._id)) {
+        await comment.deleteOne();
+        return res.redirect(`/songs/${songId}`);
+      } else {
+        throw new Error("You don't have permission to do that");
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 // export the router
 export default router;

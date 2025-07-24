@@ -7,6 +7,7 @@ import morgan from "morgan";
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import passUserToView from "./middleware/passUserToView.js";
+import passMessageToView from "./middleware/passMessageToView.js";
 
 // Routers
 import authRouter from "./controllers/auth.js";
@@ -33,6 +34,7 @@ app.use(
   })
 );
 app.use(passUserToView);
+app.use(passMessageToView);
 
 // * -------- Routes Section --------
 // Home route
@@ -55,12 +57,17 @@ app.use("/playlists", playlistsRouter);
 app.use((err, req, res, next) => {
   console.log(err);
   if (err.renderForm) {
+    return res.status(400).render("index.ejs", {
+      user: req.session.user || null,
+      message: err.message,
+    });
   }
+  return res.status(500).render("errors/error-page.ejs");
 });
 
 // 404 error
 app.use((req, res) => {
-  return res.render("errors/404.ejs");
+  return res.status(404).render("errors/404.ejs");
 });
 
 // * -------- Server Section --------

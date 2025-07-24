@@ -14,6 +14,8 @@
       <% playlist.songs.forEach(song => { %>
       <li>
         <a href="/songs/<%= song._id %>"><%= song.title %> </a>
+        <% if (playlist.owner._id.equals(user._id)) { %>
+          <section class="controls">
         <form
           action="/playlists/<%= playlist._id %>/remove-songId?_method=DELETE"
           method="POST"
@@ -21,6 +23,8 @@
           <input type="hidden" name="songId" value="<%= song._id %>" />
           <button type="submit">Remove</button>
         </form>
+      </section>
+      <% } %>
       </li>
       <% }) %>
     </ul>

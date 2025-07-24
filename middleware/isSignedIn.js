@@ -1,6 +1,10 @@
 const isSignedIn = (req, res, next) => {
   if (req.session.user) return next();
-  res.redirect('/auth/sign-in');
-}
+  else {
+    req.session.message = "Please sign in to continue.";
+    req.session.redirectTo = req.originalUrl;
+    return res.redirect("/");
+  }
+};
 
-export default isSignedIn
+export default isSignedIn;

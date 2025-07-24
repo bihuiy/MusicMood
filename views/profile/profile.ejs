@@ -9,9 +9,10 @@
     <%- include("../partials/nav.ejs") %>
 
     <h1><%= playlistOwner.username %>'s Playlists</h1>
+    <h3><%= message %></h3>
     <ul>
       <% playlists.forEach(playlist=>{ %>
-      <li><a href="/playlists/<%= playlist.id %>"><%= playlist.name %></a></li>
+      <li><a href="/playlists/<%= playlist._id %>"><%= playlist.name %></a></li>
       <% }) %>
     </ul>
   </body>

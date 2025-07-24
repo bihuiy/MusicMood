@@ -1,6 +1,7 @@
 import express from "express";
 import Playlist from "../models/playlist.js";
 import isSignedIn from "../middleware/isSignedIn.js";
+import { render } from "ejs";
 
 const router = express.Router();
 
@@ -69,7 +70,7 @@ router.delete("/:playlistId", isSignedIn, async (req, res, next) => {
       await playlist.deleteOne();
       return res.redirect(`/profile/${req.session.user._id}`);
     } else {
-      res.send("You don't have permission to do that");
+      throw new Error("You don't have permission to do that");
     }
   } catch (error) {
     next(error);
@@ -84,11 +85,18 @@ router.delete(
     const { playlistId } = req.params;
     const { songId } = req.body;
     try {
-      const playlist = await Playlist.findByIdAndUpdate(playlistId, {
-        $pull: { songs: songId },
-      });
-      res.redirect(`/playlists/${playlistId}`);
+      const playlist = await Playlist.findById(playlistId);
+      if (playlist.owner.equals(req.session.user._id)) {
+        playlist.songs = playlist.songs.filter((song) => {
+          return song.toString() !== songId;
+        });
+        await playlist.save();
+        res.redirect(`/playlists/${playlistId}`);
+      } else {
+        throw new Error("You don't have permission to do that");
+      }
     } catch (error) {
+      error.renderForm = true;
       next(error);
     }
   }

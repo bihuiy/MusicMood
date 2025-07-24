@@ -4,22 +4,6 @@ import bcrypt from "bcrypt";
 
 const router = express.Router();
 
-/* router.get("/sign-up", (req, res, next) => {
-  try {
-    return res.render("auth/sign-up.ejs");
-  } catch (error) {
-    next(error);
-  }
-}); */
-
-/* router.get("/sign-in", (req, res, next) => {
-  try {
-    return res.render("auth/sign-in.ejs");
-  } catch (error) {
-    next(error);
-  }
-}); */
-
 // Sign Up
 router.post("/sign-up", async (req, res, next) => {
   try {
@@ -34,14 +18,15 @@ router.post("/sign-up", async (req, res, next) => {
     if (existingUser)
       // At the signup stage, the user is not logged in yet, so there’s no session or local variables set.
       // We use User.findOne({ username }) to query the database directly and check if the username already exists.
-      return res.send("Username already taken. Please try another.");
+      throw new Error("Username already taken. Please try another.");
 
     // Check passwords match
     if (password !== confirmPassword)
-      return res.send("Passwords do not match.");
+      throw new Error("Passwords do not match.");
 
     // Create the user
     const user = await User.create(req.body);
+    req.session.message = "Thanks for joining MusicMood! You are signed in.";
 
     // Modify the session for the user to include information about the user account
     // The presence of a req.session.user will indicate that the user is authenticated
@@ -52,10 +37,11 @@ router.post("/sign-up", async (req, res, next) => {
     };
 
     req.session.save(() => {
-      // Redirect to the sign in page
+      // Redirect to the home page
       return res.redirect("/");
     });
   } catch (error) {
+    error.renderForm = true;
     next(error);
   }
 });
@@ -77,12 +63,17 @@ router.post("/sign-in", async (req, res, next) => {
       _id: existingUser._id,
       username: existingUser.username,
     };
+    req.session.message = "You are now signed in. Enjoy MusicMood!";
+
+    const redirectUrl = req.session.redirectTo || "/";
+    req.session.redirectTo = null;
 
     req.session.save(() => {
-      // Redirect to the previous page
-      return res.redirect("/");//????????
+      // Redirect to the home page
+      return res.redirect(redirectUrl);
     });
   } catch (error) {
+    error.renderForm = true;
     next(error);
   }
 });
