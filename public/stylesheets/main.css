@@ -19,20 +19,20 @@ nav {
   align-items: center;
 }
 
-#destination,
-#action {
+.destination,
+.action {
   display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 16px;
 }
 
-#destination a {
+.destination a {
   text-decoration: none; /* Remove the default underline from nav links */
   color: black; /* Change the default nav link color to black */
 }
 
-#destination a:hover {
+.destination a:hover {
   color: #555; /* change the nav link color to grey when hover */
 }
 
@@ -43,35 +43,46 @@ nav {
   font-weight: bold;
   border: none;
 }
+#sign-in-button:hover {
+  color: #555;
+}
 
 #sign-up-button {
   background-color: black;
   font-size: 16px;
   font-weight: bold;
   border: none;
-  margin-right: 16px;
+}
+#sign-up-button:hover {
+  background-color: #555;
 }
 
 #headers {
   height: 460px;
   text-align: center;
   background-color: plum;
-  padding: 90px 0;
-  margin: 50px 0;
+  padding: 60px 20px;
+  border-radius: 12px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #subnav {
   display: flex;
   justify-content: flex-end;
-  padding: 0 10px 10px 10px;
+  padding: 10px;
+  gap: 16px;
 }
 
 #subnav a {
   text-decoration: none;
   color: black;
 }
+#subnav a:hover {
+  color: #555;
+}
 
-.song-image-list {
+.image-list {
   list-style: none;
   display: flex;
   justify-content: space-evenly;
@@ -79,32 +90,347 @@ nav {
   gap: 50px;
 }
 
-.song-image {
+.image {
   width: 400px;
   height: 400px;
   overflow: hidden;
   border-radius: 8px;
 }
 
-.song-image img  {
+.image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.song-name {
+.name {
   text-align: center;
 }
 
-.song-name a {
+.name a {
   text-decoration: none;
   color: black;
+}
+.name a:hover {
+  color: #555;
 }
 
 .flash-message {
   text-align: center;
-  color: plum;
+  color: #666;
   font-size: 1.5rem;
 }
 
+/* Styling for pages after user signed up or signed in */
+#action-after-signin {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: bold;
+  padding: 0.5rem;
+}
+#action-after-signin a {
+  text-decoration: none;
+  color: black;
+}
 
+#action-after-signin a:hover {
+  color: #555;
+}
+
+#profile-btn {
+  background-color: black;
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+/* Styling for sign in/up modal */
+
+.modal-dialog .modal-footer {
+  border: none;
+}
+
+#signInModalLabel {
+  font-weight: bold;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.btn.btn-primary {
+  background-color: #f9f5f0;
+  color: black;
+  border: none;
+}
+.btn.btn-primary:hover {
+  background-color: #555;
+}
+#sign-up-button {
+  color: white;
+}
+
+.btn.btn-secondary {
+  background-color: #f9f5f0;
+  color: black;
+  border: none;
+}
+.btn.btn-secondary:hover {
+  background-color: #555;
+}
+
+/* Remove the blue border that appears when the input is clicked/focus */
+input:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: black;
+}
+
+/* Styling for profile page */
+.profile-header {
+  text-align: center;
+  padding: 60px 0;
+  background-color: #f9f5f0;
+  border-radius: 12px;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.profile-header h2 {
+  font-size: 1.3rem;
+  color: #555;
+}
+
+.playlist-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* styling for the playlist page */
+.playlist-header {
+  text-align: center;
+  margin: 50px 0 30px;
+}
+
+.playlist-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: black;
+}
+
+.playlist-header h2 {
+  font-size: 1.2rem;
+  color: black;
+}
+
+.playlist-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 40px;
+}
+
+.playlist-img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.playlist-img-container img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.playlist-prompt {
+  text-align: center;
+}
+
+.song-list {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 10px auto;
+}
+
+.song-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f5f0;
+  padding: 12px 20px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.song-list a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.song-list a:hover {
+  color: #555;
+}
+
+.remove-action button {
+  font-size: 0.8rem;
+  background-color: #555;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin-left: 20px;
+}
+
+.remove-action button:hover {
+  background-color: #666;
+}
+
+.remove-playlist button {
+  background-color: #f9f5f0;
+  color: black;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin: 5px 0;
+}
+
+.remove-playlist button:hover {
+  background-color: #666;
+}
+
+/* Styling for the song page */
+.comment {
+  width: 100%;
+  padding: 20px 50px;
+  margin-top: -70px;
+  background-color: #f9f5f0;
+}
+
+.comment div {
+  border-bottom: 1px solid #e0dcd5;
+}
+
+.comment a {
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.comment a:hover {
+  color: #555;
+}
+
+.comment p {
+  margin: 8px 0;
+  color: #444;
+}
+
+.comment small {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.comment form {
+  margin-top: 20px;
+}
+
+.comment textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+}
+
+.comment select {
+  margin-top: 10px;
+  padding: 5px 8px;
+  border-radius: 6px;
+}
+
+.comment button {
+  margin-top: 10px;
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+.comment button:hover {
+  background-color: #555;
+}
+
+select:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: black;
+}
+
+textarea:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: black;
+}
+
+/* Styling for the playlist-create-plage */
+.create-playlist-container {
+  max-width: 500px;
+  margin: 100px auto;
+  padding: 30px;
+  background-color: #f9f5f0;
+  border-radius: 12px;
+}
+
+.create-playlist-container h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+.create-playlist-form .form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-playlist-form label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.create-playlist-form input[type="text"],
+.create-playlist-form input[type="file"] {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.create-playlist-form input:focus {
+  outline: none;
+  border-color: black;
+}
+
+.submit-btn {
+  width: 100%;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 8px;
+}

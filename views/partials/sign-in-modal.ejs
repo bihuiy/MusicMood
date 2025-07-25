@@ -5,7 +5,7 @@
   aria-labelledby="signInModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="signInModalLabel">Sign in</h1>
@@ -17,7 +17,7 @@
         ></button>
       </div>
       <div class="modal-body">
-        <form class="form" action="/auth/sign-in" method="POST">
+        <form class="auth-form" action="/auth/sign-in" method="POST">
           <label for="username">Username:</label>
           <input type="text" name="username" id="username" required />
           <label for="password">Password:</label>

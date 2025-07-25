@@ -27,6 +27,7 @@
     "mongoose": "^8.0.1",
     "morgan": "^1.10.0",
     "multer": "^2.0.2",
+    "serverless-http": "^3.2.0",
     "streamifier": "^0.1.1"
   }
 }

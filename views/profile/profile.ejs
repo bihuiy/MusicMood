@@ -3,26 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="/stylesheets/main.css" />
-    
     <title><%= playlistOwner.username %>'s profile</title>
   </head>
   <body>
     <%- include("../partials/nav.ejs") %>
-
-    <h1><%= playlistOwner.username %>'s Playlists</h1>
-    <h3><%= message %></h3>
-    <ul>
-      <% playlists.forEach(playlist=>{ %>
-      <li>
-        <img
-          src="<%= playlist.playlistImage %>"
-          alt="playlist image"
-          width="300"
-        />
-        <a href="/playlists/<%= playlist._id %>"><%= playlist.name %></a>
-      </li>
-      <% }) %>
-    </ul>
+    <div class="profile-header">
+      <h1><%= playlistOwner.username %>'s Playlists</h1>
+      <h2><%= message %></h2>
+    </div>
+    <% if (playlists.length === 0) { %>
+    <p style="text-align: center; margin-top: 2rem">
+      You haven't created any playlists yet.
+      <a
+        href="/playlists/new"
+        style="color: black; text-decoration: none; font-weight: bold"
+        >Create your favorite playlist now!</a
+      >
+    </p>
+    <% } %>
+    <div class="playlist-container">
+      <ul class="image-list">
+        <% playlists.forEach(playlist=>{ %>
+        <li>
+          <div class="image">
+            <img src="<%= playlist.playlistImage %>" alt="playlist image" />
+          </div>
+          <div class="name">
+            <a href="/playlists/<%= playlist._id %>"><%= playlist.name %></a>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
   </body>
 </html>

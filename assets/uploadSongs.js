@@ -127,6 +127,14 @@ const seedSongs = [
     songImage:
       "https://res.cloudinary.com/dnycwkg4c/image/upload/v1753335823/Green_Green_Grass_pp8cvf.avif",
   },
+  {
+    title: "Focus Flow",
+    artist: "Brainy",
+    album: "Deep Focus",
+    releaseYear: 2023,
+    songImage:
+      "https://res.cloudinary.com/dnycwkg4c/image/upload/v1753428521/Deep_Focus_song_rroe9n.avif",
+  },
 ];
 
 // 3. Upload the songs

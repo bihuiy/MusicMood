@@ -1,14 +1,16 @@
 <nav>
-  <div id="destination">
+  <div class="destination">
     <a href="/">MusicMood</a>
     <a href="/songs">View all songs</a>
     <a href="/playlists/new">Create a playlist</a>
   </div>
-  <div id="actions">
-    <% if (user) { %>
 
-    <a href="/auth/sign-out">Sign out</a>
-    <a href="/profile/<%= user._id %>"><%= user.username %></a>
+  <div class="action">
+    <% if (user) { %>
+    <div id="action-after-signin">
+      <a href="/auth/sign-out">Sign out</a>
+      <a href="/profile/<%= user._id %>" class="profile-btn"><%= user.username %></a>
+    </div>
     <% } else { %>
     <!-- <a href="/auth/sign-in">Sign in</a> -->
     <button
