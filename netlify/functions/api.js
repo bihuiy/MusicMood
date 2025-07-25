@@ -11,7 +11,6 @@ import MongoStore from "connect-mongo";
 import passUserToView from "../middleware/passUserToView.js";
 import passMessageToView from "../middleware/passMessageToView.js";
 import Song from "../models/song.js";
-import bodyParser from "../../middleware/bodyParser.js";
 
 // * -------- Import Routers --------
 import authRouter from "../controllers/auth.js";
