@@ -8,16 +8,16 @@ import methodOverride from "method-override";
 import morgan from "morgan";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import passUserToView from "../middleware/passUserToView.js";
-import passMessageToView from "../middleware/passMessageToView.js";
-import Song from "../models/song.js";
+import passUserToView from "../../middleware/passUserToView.js";
+import passMessageToView from "../../middleware/passMessageToView.js";
+import Song from "../../models/song.js";
 import bodyParser from "../../middleware/bodyParser.js";
 
 // * -------- Import Routers --------
-import authRouter from "../controllers/auth.js";
-import songsRouter from "../controllers/songs.js";
-import profileRouter from "../controllers/profile.js";
-import playlistsRouter from "../controllers/playlists.js";
+import authRouter from "../../controllers/auth.js";
+import songsRouter from "../../controllers/songs.js";
+import profileRouter from "../../controllers/profile.js";
+import playlistsRouter from "../../controllers/playlists.js";
 
 // * -------- Const Section --------
 const app = express();
