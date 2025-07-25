@@ -90,7 +90,7 @@
         <% } %>
       </div>
     </section>
-
+    <% if (user) { %>
     <section class="comment">
       <% comments.forEach(comment => { %>
       <div>
@@ -111,7 +111,7 @@
         <% } %>
       </div>
 
-      <% }) %> <% if (user) { %>
+      <% }) %>
       <form action="/songs/<%= song._id %>/add-comments" method="POST">
         <div>
           <label for="mood">I'm feeling:</label>
