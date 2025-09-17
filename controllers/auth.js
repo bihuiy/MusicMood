@@ -36,9 +36,12 @@ router.post("/sign-up", async (req, res, next) => {
       username: user.username,
     };
 
+    const redirectUrl = req.session.redirectTo || "/";
+    req.session.redirectTo = null;
+
     req.session.save(() => {
-      // Redirect to the home page
-      return res.redirect("/");
+      // Redirect to the home page or origin url
+      return res.redirect(redirectUrl);
     });
   } catch (error) {
     error.renderForm = true;
@@ -65,11 +68,12 @@ router.post("/sign-in", async (req, res, next) => {
     };
     req.session.message = "You are now signed in. Enjoy MusicMood!";
 
-    const redirectUrl = req.session.redirectTo || "/";
+    //const redirectUrl = req.session.redirectTo || "/";
+    const redirectUrl = req.session.redirectTo;
     req.session.redirectTo = null;
 
     req.session.save(() => {
-      // Redirect to the home page
+      // Redirect to the home page or origin url
       return res.redirect(redirectUrl);
     });
   } catch (error) {

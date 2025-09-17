@@ -7,7 +7,7 @@ import Comment from "../models/comment.js";
 const router = express.Router();
 
 // index - display all songs, requires asynchronous database operations
-router.get("/", async (req, res, next) => {
+router.get("/", isSignedIn, async (req, res, next) => {
   try {
     const songs = await Song.find();
     return res.render("songs/index.ejs", {
@@ -19,7 +19,7 @@ router.get("/", async (req, res, next) => {
 });
 
 // show - display a specific song's details (+comments), requires asynchronous database querying
-router.get("/:songId", async (req, res, next) => {
+router.get("/:songId", isSignedIn, async (req, res, next) => {
   try {
     const song = await Song.findById(req.params.songId);
     const playlists = req.session.user

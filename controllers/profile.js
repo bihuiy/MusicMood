@@ -21,7 +21,7 @@ router.get("/:userId", isSignedIn, async (req, res, next) => {
     // get the user's mood from the latest comment
     const lastComment = await Comment.findOne({ user: playlistOwnerId })
       .sort({ createdAt: -1 })
-      .select("mood") //
+      .select("mood") 
       .exec();
     console.log("Last comment found:", lastComment);
     const mood = lastComment ? lastComment.mood : "None";

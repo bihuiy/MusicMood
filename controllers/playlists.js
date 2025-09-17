@@ -101,6 +101,7 @@ router.delete(
       const playlist = await Playlist.findById(playlistId);
       if (playlist.owner.equals(req.session.user._id)) {
         playlist.songs = playlist.songs.filter((song) => {
+          // or use playlist.songs.pull(songId);
           return song.toString() !== songId;
         });
         await playlist.save();
