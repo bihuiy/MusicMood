@@ -434,3 +434,67 @@ textarea:focus {
   font-size: 1rem;
   border-radius: 8px;
 }
+
+@media (min-width: 319px) and (max-width: 480px) {
+  body {
+    font-size: 12px;
+  }
+  nav {
+    padding: 2px 4px;
+  }
+  #sign-in-button, #sign-up-button {
+    font-size: 12px;
+  }
+  .image-list {
+    margin: 0;
+    padding: 0;
+  }
+  .image {
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+}
+@media (min-width: 481px) and (max-width: 1200px) {
+  body {
+    font-size: 20px;
+  }
+  nav {
+    padding: 4px 8px;
+  }
+  #sign-in-button, #sign-up-button {
+    font-size: 20px;
+  }
+  .image-list {
+    margin: 0;
+    padding: 0;
+  }
+  .image {
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+}
+@media (min-width: 1201px) and (max-width: 1600px) {
+  body {
+    font-size: 24px;
+  }
+  nav {
+    padding: 4px 8px;
+  }
+  #sign-in-button, #sign-up-button {
+    font-size: 24px;
+  }
+  .image-list {
+    margin: 0;
+    padding: 0;
+  }
+  .image {
+    width: 350px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+}
