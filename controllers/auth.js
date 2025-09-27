@@ -68,8 +68,7 @@ router.post("/sign-in", async (req, res, next) => {
     };
     req.session.message = "You are now signed in. Enjoy MusicMood!";
 
-    //const redirectUrl = req.session.redirectTo || "/";
-    const redirectUrl = req.session.redirectTo;
+    const redirectUrl = req.session.redirectTo || "/";
     req.session.redirectTo = null;
 
     req.session.save(() => {
